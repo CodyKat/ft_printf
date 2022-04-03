@@ -2,6 +2,7 @@
 
 int main()
 {
+	/*
 	int a = 3;
 	int* p_a = &a;
 	printf("#################################################################\n");
@@ -253,5 +254,28 @@ int main()
 	printf("\n");
 	printf("printf(\"%%-2.2x\", 12345) : |%-2.2x|, ", 12345);
 	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	*/
+	printf("#################################################################\n");
+	printf("####                       %%c 파트입니다!!                   ####\n");
+	printf("#################################################################\n\n");
+
+	printf("printf(\"%%5c\", 'a') : |%5c|, ", 'c');
+	printf("\n");
+	printf("printf(\"%% c\", 'a') : |% c|, (warning : flag ' ' is undefined)", 'c');
+	printf("\n");
+	printf("printf(\"%%+c\", 'a') : |%+c|, (warning : flag '+' is undefined)", 'c');
+	printf("\n");
+	printf("printf(\"%%-c\", 'a') : |%-c|, ", 'c');
+	printf("\n");
+	printf("printf(\"%%-5c\", 'a') : |%-5c|", 'c');
+	printf("\n");
+	printf("printf(\"%%05c\", 'a') : |%05c|, ", 'c');
+	printf("\n");
+	printf("printf(\"%%-05c\", 'a') : |%-05c|, ", 'c');
+	printf("\n");
+
 	return 0;
 }

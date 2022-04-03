@@ -6,16 +6,25 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:04:40 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/04/02 11:18:18 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/04/03 16:08:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define LEFT_SORT 32
-#define FILL_ZERO 16
-#define PRECISION 8
-#define SHOW_BASE 4
-#define START_SPACE 2
-#define SHOW_SIGN 1
+#define LEFT_SORT 1
+#define FILL_ZERO 2
+#define PRECISION 4
+#define SHOW_BASE 8
+#define START_SPACE 16
+#define SHOW_SIGN 32
+#define TYPE_C 64
+#define TYPE_S 128
+#define TYPE_P 256
+#define TYPE_D 512
+#define TYPE_I 1024
+#define TYPE_U 2048
+#define TYPE_LOWER_X 4096
+#define TYPE_UPPER_X 8192
+#define TYPE_PERSENT 16384
 
 int	ft_write_char(char **chr)
 {
@@ -26,7 +35,7 @@ int	ft_write_char(char **chr)
 
 void	setting_width_precision(char **format, int *width, int *precision)
 {
-	if (*((*format) - 1) != '.')
+	if (*(*format - 1) != '.')
 	{
 		*width = ft_atoi(*format);
 		(*foramt) += nbr_len(*width) - 1;
@@ -38,7 +47,29 @@ void	setting_width_precision(char **format, int *width, int *precision)
 	}
 }
 
-void	set_flag(unsigned char *flag, char **format, int *width, int *precision)
+void	set_type(unsigned int *flag, char **format)
+{
+	if (**format == 'c')
+		flag = flag | TYPE_C;
+	if (**format == 's')
+		flag = flag | TYPE_S;
+	if (**format == 'p')
+		flag = flag | TYPE_P;
+	if (**format == 'd')
+		flag = flag | TYPE_D;
+	if (**format == 'i')
+		flag = flag | TYPE_I;
+	if (**format == 'u')
+		flag = flag | TYPE_U;
+	if (**format == 'x')
+		flag = flag | TYPE_LOWER_X;
+	if (**format == 'X')
+		flag = flag | TYPE_UPPER_X;
+	else
+		flag = flag | TYPE_PERSENT;
+}
+
+void	set_flag(unsigned int *flag, char **format, int *width, int *precision)
 {
 	while (is_inset(**format, "cspdiuxX%") == 0)
 	{
@@ -58,18 +89,34 @@ void	set_flag(unsigned char *flag, char **format, int *width, int *precision)
 			setting_width_precision(format, width, precision);
 		(*format)++;
 	}
+	set_type(flag, format);	
+}
+
+char	*make_line(va_list ap, unsigned int flag, int width, int precision)
+{
+	if (flag & TYPE_C)
+		return (make_char(ap, flag, width, precision));
+	if (flag & TYPE_S)
+		return (make_string(ap, flag, width, precision));
+	if (flag & TYPE_P)
+		return (make_pointer(ap, flag, width, precision));
+	if ((flag & TYPE_I) || (flag & TYPE_D))
+		return (make_int(ap, flag, width, precision));
+	if ((flag & TYPE_U) || (flag & TYPE_LOWER_X) || (flag & TYPE_UPPER_X))
+		return (make_ui_base(ap, flag, width, precision));
+	if (flag & TYPE_PERSENT)
+		return ("%");
 }
 
 int	ft_print_args(va_list ap, char **format)
 {
-	unsigned char	flag;
+	unsigned int	flag;
+	char			*print_line;
 	int				width;
 	int				precision;
-	int				print_len;
 
 	set_flag(&flag, format, &width, &precision);
-	print_len = 0;
-	cal_print_len(flag, *((*format) + 1))
+	print_line = make_line(ap, flag, width, precision);
 }
 
 int ft_printf(const char *format)

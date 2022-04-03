@@ -61,4 +61,7 @@ int main()
 	printf("PART %%\n");
 	printf("%%\n");
 	ft_printf("%%\n");
+	printf("\n\n\n\n");
+	printf("as%\n");
+	ft_printf("as%");
 }
