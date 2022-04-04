@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:04:40 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/04/03 17:40:43 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/04/04 17:58:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int ft_printf(const char *format)
 {
 	va_list		ap;
 	int			print_len;
-	const char	*format_cursor;
 
 	print_len = 0;
 	va_start(ap, format);
