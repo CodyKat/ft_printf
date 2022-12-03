@@ -1,0 +1,3 @@
+[submodule "42course_libft"]
+	path = 42course_libft
+	url = git@github.com:CodyKat/42course_libft.git
