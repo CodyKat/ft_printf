@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 12:33:44 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/03/29 12:35:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:29:38 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include "libft/libft.h"
+# include "42course_libft/libft.h"
 
 int		ft_printf(const char *format, ...);
 int		ft_print_char(va_list ap);
