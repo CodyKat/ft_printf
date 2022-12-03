@@ -1,30 +1,24 @@
 CC = gcc
 NAME = libftprintf.a
 NAME_LIBFT = libft.a
-LIBFT_DIR = ./libft/
+LIBFT_DIR = ./42course_libft/
 CFLAGS = -Wall -Wextra -Werror
-SRCS_MAN = ft_printf.c			\
+SRCS = ft_printf.c			\
 		   ft_printf_mode.c		\
 		   ft_printf_utils.c 
 
-OBJS_MAN = ${SRCS_MAN:.c=.o}
-OBJS_BONUS = ${SRCS_BONUS:.c=.o}
+OBJS = ${SRCS:.c=.o}
 
 all : ${NAME}
 
-ifdef IS_BONUS
-	SRCS_FILES = ${SRCS_BONUS}
-	OBJS_FILES = ${OBJS_BONUS}
-else
-	SRCS_FILES = ${SRCS_MAN}
-	OBJS_FILES = ${OBJS_MAN}
-endif
+$(NAME) : $(NAME_LIBFT) $(OBJS)
+	ar rsv $(NAME_LIBFT) $(OBJS)
+	
 
-$(NAME) :
-	cd ${LIBFT_DIR}; make; cp ${NAME_LIBFT} ../; \
-		cd ../; mv ${NAME_LIBFT} ${NAME}; make compile; ar rsv ${NAME} ${OBJS_FILES}
+$(NAME_LIBFT) :
+	make -C $(LIBFT_DIR) all
 
-compile : ${SRCS_MAN} ${SRCS_BONUS}
+compile : ${SRCS}
 	${CC} ${CFLAGS} -c $^
 
 clean :
