@@ -1,7 +1,7 @@
 CC = gcc
 NAME = libftprintf.a
 NAME_LIBFT = libft.a
-LIBFT_DIR = ./42course_libft/
+LIBFT_DIR = ./libft/
 LIBFT = $(LIBFT_DIR)/$(NAME_LIBFT)
 CFLAGS = -Wall -Wextra -Werror
 SRCS = ft_printf.c			\
